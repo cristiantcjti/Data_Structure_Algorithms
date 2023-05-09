@@ -35,19 +35,19 @@ class LinkedList:
         return True      
 
 
+if __name__=='__main__':
+    my_linked_list = LinkedList(1)
+    my_linked_list.make_empty()
 
-my_linked_list = LinkedList(1)
-my_linked_list.make_empty()
+    my_linked_list.append(1)
+    my_linked_list.append(2)
 
-my_linked_list.append(1)
-my_linked_list.append(2)
+    print('Head:', my_linked_list.head.value)
+    print('Tail:', my_linked_list.tail.value)
+    print('Length:', my_linked_list.length, '\n')
 
-print('Head:', my_linked_list.head.value)
-print('Tail:', my_linked_list.tail.value)
-print('Length:', my_linked_list.length, '\n')
-
-print('Linked List:')
-my_linked_list.print_list()
+    print('Linked List:')
+    my_linked_list.print_list()
 
 
 
