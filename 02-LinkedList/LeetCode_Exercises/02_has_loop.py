@@ -50,7 +50,6 @@ if __name__=="__main__":
     print(my_linked_list_2.has_loop() ) # Returns False
 
 
-
     """
         EXPECTED OUTPUT:
         ----------------
