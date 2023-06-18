@@ -2,53 +2,40 @@ class Node:
     def __init__(self, value):
         self.value = value
         self.next = None
+        self.prev = None
 
-        
-class LinkedList:
+class DoublyLinkedList:
     def __init__(self, value):
         new_node = Node(value)
         self.head = new_node
         self.tail = new_node
         self.length = 1
 
-    def print_list(self):
-        temp = self.head
-        while temp is not None:
-            print(temp.value)
-            temp = temp.next
-
-    def make_empty(self):
-        self.head = None
-        self.tail = None
-        self.length = 0
-
     def append(self, value):
         new_node = Node(value)
-        if self.length == 0:
+        if self.head is None:
             self.head = new_node
             self.tail = new_node
         else:
             self.tail.next = new_node
+            new_node.prev = self.tail
             self.tail = new_node
-        self.length += 1      
-        
-        return True   
-
+        self.length += 1
+        return True
+    
     def pop(self):
         if self.length == 0:
             return None
-        temp = self.head
-        pre = self.head
-        while(temp.next):
-            pre = temp 
-            temp = temp.next
-        self.tail = pre
-        self.tail.next = None
-        self.length -= 1
-        if self.length == 0:
+        temp = self.tail
+        if self.length == 1:
             self.head = None
             self.tail = None
-        return temp.value
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            temp.prev = None
+        self.length -= 1
+        return temp
     
     def prepend(self, value):
         new_node = Node(value)
@@ -57,34 +44,43 @@ class LinkedList:
             self.tail = new_node
         else:
             new_node.next = self.head
+            self.head.prev = new_node
             self.head = new_node
         self.length += 1
-        return True
-    
+        return True 
+
     def pop_first(self):
         if self.length == 0:
-            return 0
+            return None
         temp = self.head
-        self.head = self.head.next
-        temp.next = None
+        if self.length == 1:
+            self.head = None
+            self.tail = None 
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+            temp.next = None
         self.length -= 1
-        if self.length == 0:
-            self.tail = None
-        return temp # temp.value to see the value insted of the object.
+        return temp
+
+    def print_list(self):
+        temp = self.head 
+        while temp is not None:
+            print(temp.value)
+            temp = temp.next
 
 
-if __name__=='__main__':
-    my_linked_list = LinkedList(2)
-    my_linked_list.append(1)
+if __name__=="__main__":
+    my_doubly_linked_list = DoublyLinkedList(2)
+    my_doubly_linked_list.append(1)
 
 
     # (2) Items - Returns 2 Node
-    print(my_linked_list.pop_first())
+    print(my_doubly_linked_list.pop_first().value)
     # (1) Item -  Returns 1 Node
-    print(my_linked_list.pop_first())
+    print(my_doubly_linked_list.pop_first().value)
     # (0) Items - Returns None
-    print(my_linked_list.pop_first())
-
+    print(my_doubly_linked_list.pop_first())
 
 
     """
@@ -94,4 +90,4 @@ if __name__=='__main__':
         1
         None
 
-    """
+    """            
