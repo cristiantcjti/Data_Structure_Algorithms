@@ -11,6 +11,12 @@ class DoublyLinkedList:
         self.tail = new_node
         self.length = 1
 
+    def print_list(self):
+        temp = self.head 
+        while temp is not None:
+            print(temp.value)
+            temp = temp.next    
+
     def append(self, value):
         new_node = Node(value)
         if self.head is None:
@@ -75,34 +81,44 @@ class DoublyLinkedList:
             for _ in range(self.length - 1, index, -1):
                 temp = temp.prev
         return temp
-
-    def print_list(self):
-        temp = self.head 
-        while temp is not None:
-            print(temp.value)
-            temp = temp.next
+    
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+        return False
 
 
 if __name__=="__main__":
-    my_doubly_linked_list = DoublyLinkedList(0)
-    my_doubly_linked_list.append(1)
-    my_doubly_linked_list.append(2)
+    my_doubly_linked_list = DoublyLinkedList(15)
     my_doubly_linked_list.append(3)
+    my_doubly_linked_list.append(22)
+    my_doubly_linked_list.append(6)
 
-    print('Get node from first half of DLL:')
-    print(my_doubly_linked_list.get(1).value)
+    print('DLL before set_value():')
+    my_doubly_linked_list.print_list()
 
-    print('\nGet node from second half of DLL:')
-    print(my_doubly_linked_list.get(2).value)
+    my_doubly_linked_list.set_value(1,4)
+
+    print('\nDLL after set_value():')
+    my_doubly_linked_list.print_list()
+
 
 
     """
         EXPECTED OUTPUT:
         ----------------
-        Get node from first half of DLL:
-        1
+        DLL before set_value():
+        15
+        3
+        22
+        6
 
-        Get node from second half of DLL:
-        2
+        DLL after set_value():
+        15
+        4
+        22
+        6
 
     """
